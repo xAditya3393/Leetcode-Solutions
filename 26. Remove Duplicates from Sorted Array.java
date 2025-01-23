@@ -50,12 +50,34 @@ class Solution {
     public int removeDuplicates(int[] nums) {
         if(nums.length == 0) return 0;
 
+        int uniqueBoundary = 0;
+
+        for(int itr = 1; itr < nums.length; itr++){
+            if(nums[itr] != nums[uniqueBoundary]) nums[++uniqueBoundary] = nums[itr];
+        }
+
+        return uniqueBoundary+1;
+    }
+}
+
+
+/*
+
+Notice how the below solution has more opertions involved leading to higher runtime on leetcode
+uniqueBoundary-1 -> check for if condition, subtraction operation 
+
+*/
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length == 0) return 0;
+
         int uniqueBoundary = 1;
 
         for(int itr = 1; itr < nums.length; itr++){
-            if(nums[itr] != nums[uniqueBoundary]) nums[uniqueBoundary++] = nums[itr];
+            if(nums[itr] != nums[uniqueBoundary-1]) nums[uniqueBoundary++] = nums[itr];
         }
 
-        return uniqueBoundary++;
+        return uniqueBoundary;
     }
 }
